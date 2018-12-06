@@ -32,6 +32,9 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# To meet Twelve-factor standards. Log to stdout instead of a log file. Serve static assets.
+gem 'rails_12factor'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -42,7 +45,7 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'database_cleaner'
-end
 
-gem 'rspec', '~> 2.99.0'
-gem 'rspec-rails', '~> 2.99.0'
+  gem 'rspec', '~> 3.8'
+  gem 'rspec-rails', '~> 3.8'
+end
