@@ -12,11 +12,11 @@ default: &default
 
 development:
   <<: *default
-  database: coder-pinterest_development
+  database: new_coder-pinterest_development
 
 test:
   <<: *default
-  database: coder-pinterest_test
+  database: new_coder-pinterest_test
 
 production:
   url: <%= ENV['DATABASE_URL'] %>
