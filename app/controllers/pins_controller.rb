@@ -30,11 +30,19 @@ class PinsController < ApplicationController
 
   def edit
     @pin = Pin.find(params[:id])
+<<<<<<< HEAD
+=======
+    render :edit
+>>>>>>> forms
   end
 
   def update
     @pin = Pin.find(params[:id])
+<<<<<<< HEAD
     @pin.update(pin_params) #update_attributes dep in R6
+=======
+    @pin.update(pin_params) # update_attributes dep in R6
+>>>>>>> forms
     if @pin.valid?
       @pin.save
       redirect_to "/pins/#{@pin.id}"
@@ -42,7 +50,11 @@ class PinsController < ApplicationController
       @errors = @pin.errors
       render :edit
     end
+<<<<<<< HEAD
   end
+=======
+  end 
+>>>>>>> forms
 
   private
 

@@ -85,12 +85,11 @@ RSpec.describe PinsController do
 
   describe "GET edit" do
     before(:each) do
-      @pin = Pin.create(
-        title: "Rails Wizard",
-        url: "http://railswizard.org",
-        slug: "rails-wizard",
-        text: "A fun and helpful Rails Resource",
-        category_id: 1)
+      @pin = Pin.create(title: "Rails Wizard",
+      url: "http://railswizard.org",
+      slug: "rails-wizard",
+      text: "A fun and helpful Rails Resource",
+      category_id: 1)
     end
 
     after(:each) do
@@ -122,7 +121,7 @@ RSpec.describe PinsController do
       url: "http://railswizard.org",
       slug: "rails-wizard",
       text: "A fun and helpful Rails Resource",
-      category_id: "rails")
+      category_id: 1)
       @pin_hash = {
         title: "Rails Wizard",
         url: "http://railswizard.org",
