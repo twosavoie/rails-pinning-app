@@ -28,6 +28,23 @@ class PinsController < ApplicationController
     end
   end
 
+  def edit
+    @pin = Pin.find(params[:id])
+    render :edit
+  end
+
+  def update
+    @pin = Pin.find(params[:id])
+    @pin.update(pin_params) # update_attributes dep in R6
+    if @pin.valid?
+      @pin.save
+      redirect_to "/pins/#{@pin.id}"
+    else
+      @errors = @pin.errors
+      render :edit
+    end
+  end 
+
   private
 
   def pin_params
