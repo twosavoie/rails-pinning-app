@@ -1,6 +1,22 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Allows secrets.yml to not be in version control and still be able to push and use in Heroku.
+#  https://stackoverflow.com/questions/23180650/how-to-solve-error-missing-secret-key-base-for-production-environment-rai/26541742#26541742
+#Max suggested: config.secret_key_base = ENV["SECRET_KEY_BASE"]
+# and  config.secret_token = ENV["SECRET_TOKEN"]
+config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
+config.paperclip_defaults = {
+  storage: :s3,
+  s3_credentials: {
+    bucket: ENV.fetch('AWS_BUCKET'),
+    access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+    secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+    s3_region: ENV.fetch('AWS_REGION')
+  }
+}
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

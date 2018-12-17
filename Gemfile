@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 # allows uploading of images
 gem 'paperclip'
 
+# for AWS
+gem 'aws-sdk-s3', '~> 1.0.0.rc2'
+gem 'aws-sdk', '< 2.0'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
