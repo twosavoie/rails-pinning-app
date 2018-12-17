@@ -3,7 +3,7 @@ Rails.application.configure do
 
   Paperclip.options[:command_path] = "/usr/local/bin/convert"
   config.paperclip_defaults = {
-    :storage => :s3
+    :storage => :s3,
     :s3_credentials => {
       :bucket => Rails.application.secrets.bucket,
       :access_key_id => Rails.application.secrets.access_key_id,
