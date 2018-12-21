@@ -1,0 +1,23 @@
+<h1>Login</h1>
+
+<% if !@errors.nil? %>
+  <%= @errors %>
+<% end %>
+
+<%= form_tag "/login" do %>
+<table>
+  <tr>
+    <th class="login">Email</th>
+    <td class="login"><%= email_field_tag :email %></td>
+  </tr>
+  <tr>
+    <th class="login">Password</th>
+    <td class="login"><%= password_field_tag :password %></td>
+  </tr>
+  <tr>
+    <td class="login" colspan="2"><%= submit_tag :login %></td>
+  </tr>
+</table>
+<% end %>
+<br />
+<p>Not a user? <%= link_to "Create an account!", new_user_path %></p>

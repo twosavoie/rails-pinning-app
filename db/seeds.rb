@@ -38,3 +38,10 @@ Pin.create(
     lessons and solve problems, all in your browser!",
   slug: "ruby-monk",
   category_id: 1)
+
+  # what I should have is
+  # set up the association between Category <> Pin
+  # create a Category
+  # rails = Category.create name: "rails"
+  # create a pin referencing the category
+  # pin = Pin.new ....., category: rails

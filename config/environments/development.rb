@@ -10,6 +10,8 @@ Rails.application.configure do
       :secret_access_key => Rails.application.secrets.secret_access_key,
     },
     :s3_region => Rails.application.secrets.s3_region
+#    :s3_host_name => Rails.application.secrets.s3_host_name
+#    :url => Rails.application.secrets.url
   }
 
   # In the development environment your application's code is reloaded on
