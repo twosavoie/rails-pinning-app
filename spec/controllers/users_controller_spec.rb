@@ -28,12 +28,31 @@ RSpec.describe UsersController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
+
+  before(:each) do
+    @user = FactoryBot.build(:user)
+  end
+  after(:each) do
+    if !@user.destroyed?
+      @user.destroy
+  end
+end
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      first_name: @user.first_name,
+      last_name: @user.last_name,
+      email: @user.email,
+      password: @user.password
+    }
   }
 
+# Could leave any attributes out since they are all required
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      first_name: @user.first_name,
+      last_name: @user.last_name
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -41,6 +60,7 @@ RSpec.describe UsersController, type: :controller do
   # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+    # No longer showing the user index page so no longer need to test for it
 #  describe "GET #index" do
 #    it "returns a success response" do
 #      User.create! valid_attributes
@@ -146,27 +166,41 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "POST login" do
-    before(:all) do
-      @user = User.create(email: "coder@skillcrush.com", password: "secret")
-      @valid_user_hash = {email: @user.email, password: @user.password}
-      @invalid_user_hash = {email: "", password: ""}
-    end
-
-    after(:all) do
-      if !@user.destroyed?
-        @user.destroy
-      end
-    end
-
+    # Ok, I created my own user here, but am I supposed to? or am I supposed to use FactoryBot? See below for what I had before that stopped working after I added/started using FactoryBot
     it "renders the show view if params valid" do
-      post :authenticate, @valid_user_hash
-      expect(response).to redirect_to(user_path(@user.id))
+      user = User.create! valid_attributes 
+      post :authenticate, {email: @user.email, password: @user.password}
+      expect(response).to redirect_to(user_path(user.id))
     end
 
     it "populates @user if params valid" do
-      post :authenticate, @valid_user_hash
-      expect(assigns(:user)).to eq(@user)
+      user = User.create! valid_attributes
+      post :authenticate, {email: @user.email, password: @user.password}
+      expect(assigns(:user)).to eq(user)
     end
+
+    # I'm using the test above where I create a user. Everything below stopped working after I started using FactoryBot. I still had errors afte removing the before & after. Maybe there is a better way.
+#    before(:all) do
+#      @user = User.create(email: "coder@skillcrush.com", password: "secret")
+#      @valid_user_hash = {email: @user.email, password: @user.password}
+#      @invalid_user_hash = {email: "", password: ""}
+#    end
+
+#    after(:all) do
+#      if !@user.destroyed?
+#        @user.destroy
+#      end
+#    end
+
+#    it "renders the show view if params valid" do
+#      post :authenticate, @valid_user_hash
+#      expect(response).to redirect_to(user_path(@user.id))
+#    end
+
+#    it "populates @user if params valid" do
+#      post :authenticate, @valid_user_hash
+#      expect(assigns(:user)).to eq(@user)
+#    end
 
     it "renders the login view if params invalid" do
       post :authenticate, @invalid_user_hash

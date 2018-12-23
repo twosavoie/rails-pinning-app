@@ -7,6 +7,8 @@ gem 'paperclip'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'aws-sdk', '< 2.0'
 
+# for password encryption
+gem 'bcrypt', '~> 3.1.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
@@ -46,18 +48,25 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-end
-
-group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  # Helps test validations
+  gem 'shoulda-matchers', '4.0.0.rc1'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+
   gem 'database_cleaner'
 
   gem 'rspec', '~> 3.8'
   gem 'rspec-rails', '~> 3.8'
+  gem 'factory_bot_rails' 
 end
 
 ruby '2.4.4'
