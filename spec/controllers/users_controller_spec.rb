@@ -70,10 +70,18 @@ end
 #  end
 
   describe "GET #show" do
+    # This is a little different than the SK test
     it "returns a success response" do
       user = User.create! valid_attributes
+      post :authenticate, {email: @user.email, password: @user.password}
       get :show, {:id => user.to_param}, valid_session
       expect(response).to be_successful
+    end
+
+    it "redirects to login if user is not signed in" do
+      user = User.create! valid_attributes
+      get :show, {:id => user.to_param}, valid_session
+      expect(response).to redirect_to(:login)
     end
   end
 
@@ -87,8 +95,15 @@ end
   describe "GET #edit" do
     it "returns a success response" do
       user = User.create! valid_attributes
+      post :authenticate, {email: @user.email, password: @user.password}
       get :edit, {:id => user.to_param}, valid_session
       expect(response).to be_successful
+    end
+
+    it "redirects to login if user is not signed in" do
+      user = User.create! valid_attributes
+      get :edit, {:id => user.to_param}, valid_session
+      expect(response).to redirect_to(:login)
     end
   end
 
@@ -129,6 +144,7 @@ end
 
       it "redirects to the user" do
         user = User.create! valid_attributes
+        post :authenticate, {email: @user.email, password: @user.password}
         put :update, {:id => user.to_param, :user => valid_attributes}, valid_session
         expect(response).to redirect_to(user)
       end
@@ -137,15 +153,23 @@ end
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         user = User.create! valid_attributes
+        post :authenticate, {email: @user.email, password: @user.password}
         put :update, {:id => user.to_param, :user => invalid_attributes}, valid_session
         expect(response).to be_successful
       end
+    end
+
+    it "redirects to login if user is not signed in" do
+      user = User.create! valid_attributes
+      put :update, {:id => user.to_param}, valid_session
+      expect(response).to redirect_to(:login)
     end
   end
 
   describe "DELETE #destroy" do
     it "destroys the requested user" do
       user = User.create! valid_attributes
+      post :authenticate, {email: @user.email, password: @user.password}
       expect {
         delete :destroy, {:id => user.to_param}, valid_session
       }.to change(User, :count).by(-1)
@@ -153,8 +177,15 @@ end
 
     it "redirects to the users list" do
       user = User.create! valid_attributes
+      post :authenticate, {email: @user.email, password: @user.password}
       delete :destroy, {:id => user.to_param}, valid_session
       expect(response).to redirect_to(users_url)
+    end
+
+    it "redirects to login if user is not signed in" do
+      user = User.create! valid_attributes
+      delete :destroy, {:id => user.to_param}, valid_session
+      expect(response).to redirect_to(:login)
     end
   end
 
@@ -168,7 +199,7 @@ end
   describe "POST login" do
     # Ok, I created my own user here, but am I supposed to? or am I supposed to use FactoryBot? See below for what I had before that stopped working after I added/started using FactoryBot
     it "renders the show view if params valid" do
-      user = User.create! valid_attributes 
+      user = User.create! valid_attributes
       post :authenticate, {email: @user.email, password: @user.password}
       expect(response).to redirect_to(user_path(user.id))
     end
