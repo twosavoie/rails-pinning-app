@@ -12,6 +12,8 @@
   </div>
   <% end %>
 
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
   <div class="form-group">
     <label for="pin_image">Image</label>
     <%= f.file_field :image %>

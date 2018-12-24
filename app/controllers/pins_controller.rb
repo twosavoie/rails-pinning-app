@@ -1,7 +1,9 @@
 class PinsController < ApplicationController
+  before_action :require_login, except: [:index, :show, :show_by_name]
 
   def index
-    @pins = Pin.all
+#    @pins = Pin.all
+    @pins = current_user.pins
   end
 
   def show
@@ -49,7 +51,7 @@ class PinsController < ApplicationController
   private
 
   def pin_params
-    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image)
+    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id)
   end
 
 end
