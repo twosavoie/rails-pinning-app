@@ -18,4 +18,17 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
-end 
+end
+
+def login(user)
+  logged_in_user = User.authenticate(user.email, user.password)
+  if logged_in_user.present?
+    session[:user_id] = logged_in_user.id
+  end
+end
+
+def logout(user)
+  if session[:user_id] == user.id
+    session.delete(:user_id)
+  end
+end

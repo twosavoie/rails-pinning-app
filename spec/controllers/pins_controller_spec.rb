@@ -1,6 +1,18 @@
 require 'spec_helper'
 RSpec.describe PinsController do
 
+  before(:each) do
+    @user = FactoryBot.create(:user)
+    login(@user)
+  end
+
+  after(:each) do
+    if !@user.destroyed?
+      @user.destroy
+    end
+  end
+
+
   describe "GET index" do
 
     it 'renders the index template' do
@@ -8,10 +20,19 @@ RSpec.describe PinsController do
       expect(response).to render_template("index")
     end
 
-    it 'populates @pins with all pins' do
+    # I don't know what to write for this test and none of the other githubs I looked at helped. I think what I need to do is if a user is logged in, get the index page for that user and then the expectation should be right. OMG it works!
+    it 'populates @pins with users pins' do
+      login(@user)
       get :index
-      expect(assigns[:pins]).to eq(Pin.all)
+      expect(assigns[:pins]).to eq(@user.pins)
     end
+
+    it 'redirects to Login when logged out' do
+      logout(@user)
+      get :index
+      expect(response).to redirect_to(:login)
+    end
+
   end
 
   describe "GET new" do
@@ -28,6 +49,12 @@ RSpec.describe PinsController do
     it 'assigns an instance variable to a new pin' do
       get :new
       expect(assigns(:pin)).to be_a_new(Pin)
+    end
+
+    it 'redirects to Login when logged out' do
+      logout(@user)
+      get :new
+      expect(response).to redirect_to(:login)
     end
   end
 
@@ -81,6 +108,12 @@ RSpec.describe PinsController do
       expect(assigns[:errors].present?).to be(true)
     end
 
+    it 'redirects to Login when logged out' do
+      logout(@user)
+      post :create, pin: @pin_hash
+      expect(response).to redirect_to(:login)
+    end
+
   end
 
   describe "GET edit" do
@@ -113,6 +146,13 @@ RSpec.describe PinsController do
       get :edit, id: @pin.id
       expect(assigns(:pin)).to eq(@pin)
     end
+
+    it 'redirects to Login when logged out' do
+      logout(@user)
+      get :edit, id: @pin.id
+      expect(response).to redirect_to(:login)
+    end
+
   end
 
   describe "PUT update" do
@@ -164,6 +204,12 @@ RSpec.describe PinsController do
       put :update, pin: @pin_hash, id: @pin.id
       expect(response).to render_template(:edit)
     end
+
+    it 'redirects to Login when logged out' do
+        logout(@user)
+        put :update, pin: @pin_hash, id: @pin.id
+        expect(response).to redirect_to(:login)
+      end
   end
 
 #final end
