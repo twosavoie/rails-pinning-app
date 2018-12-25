@@ -13,11 +13,11 @@ class UsersController < ApplicationController
   def show
   end
 
-  # did I miss doing this? Look at video?
-  # def show_by_email
-  #   @user = User.find_by_email(params[:email])
-  #   render :show
-  # end
+
+   def show_by_email
+     @user = User.find_by_email(params[:email])
+     render :show
+   end
 
   # GET /users/new
   def new
