@@ -22,7 +22,6 @@ RSpec.describe PinsController do
 
     # I don't know what to write for this test and none of the other githubs I looked at helped. I think what I need to do is if a user is logged in, get the index page for that user and then the expectation should be right. OMG it works!
     it 'populates @pins with all pins' do
-      login(@user)
       get :index
       expect(assigns[:pins]).to eq(Pin.all) #(@user.pins)
     end
