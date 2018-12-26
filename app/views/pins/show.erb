@@ -14,6 +14,14 @@
     <%= link_to "#{@pin.url}", "#{@pin.url}", html_options = {target: "_blank", class: "url"} %>
   </p>
   <img src="<%= @pin.image.url(:medium) %>">
+  <%= link_to repin_path(@pin), class: "btn btn-default", method: "post" do %> Repin!
+  <% end %>
+  <p>This pin has been pinned by:</p>
+    <ul>
+      <% @users.each do |user| %>
+      <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
+      <% end %>
+    </ul>
 </div>
 <br/>
 <a href="/">

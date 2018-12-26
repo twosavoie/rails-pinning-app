@@ -2,16 +2,18 @@ class PinsController < ApplicationController
   before_action :require_login, except: [:show, :show_by_name]
 
   def index
-#    @pins = Pin.all
-    @pins = current_user.pins
+    @pins = Pin.all
+#    @pins = current_user.pins - changed after adding repinning ability
   end
 
   def show
     @pin = Pin.find(params[:id])
+    @users = @pin.users
   end
 
   def show_by_name
     @pin = Pin.find_by_slug(params[:slug])
+    @users = @pin.users
     render :show
   end
 
@@ -47,6 +49,11 @@ class PinsController < ApplicationController
     end
   end
 
+  def repin
+    @pin = Pin.find(params[:id])
+    @pin.pinnings.create(user: current_user)
+    redirect_to user_path(current_user)
+  end
 
   private
 
