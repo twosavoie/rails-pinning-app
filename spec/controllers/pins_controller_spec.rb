@@ -21,10 +21,10 @@ RSpec.describe PinsController do
     end
 
     # I don't know what to write for this test and none of the other githubs I looked at helped. I think what I need to do is if a user is logged in, get the index page for that user and then the expectation should be right. OMG it works!
-    it 'populates @pins with users pins' do
+    it 'populates @pins with all pins' do
       login(@user)
       get :index
-      expect(assigns[:pins]).to eq(@user.pins)
+      expect(assigns[:pins]).to eq(Pin.all) #(@user.pins)
     end
 
     it 'redirects to Login when logged out' do
@@ -210,6 +210,37 @@ RSpec.describe PinsController do
         put :update, pin: @pin_hash, id: @pin.id
         expect(response).to redirect_to(:login)
       end
+  end
+
+  describe "POST repin" do
+    before(:each) do
+      @user = FactoryBot.create(:user)
+      login(@user)
+      @pin = FactoryBot.create(:pin)
+    end
+
+    after(:each) do
+      pin = Pin.find_by_slug("rails-wizard")
+      if !pin.nil?
+        pin.destroy
+      end
+      logout(@user)
+    end
+
+    it 'responds with a redirect' do
+      post :repin, id: @pin.id, pin: {pinning: {user_id: @user.id}}
+      expect(response.redirect?).to be(true)
+    end
+
+    it 'creates a user.pin' do
+      post :repin, id: @pin.id, pin: {pinning: {user_id: @user.id}}
+      expect(assigns(:pin)).to eq(Pin.find(@pin.id))
+    end
+
+    it 'redirects to the user show page' do
+      post :repin, id: @pin.id, pin: {pinning: {user_id: @user.id}}
+      expect(response).to redirect_to(user_path(@user))
+    end
   end
 
 #final end
