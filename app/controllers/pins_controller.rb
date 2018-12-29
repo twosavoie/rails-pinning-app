@@ -50,14 +50,18 @@ class PinsController < ApplicationController
     end
   end
 
+# now that I have the permitted correct, retry mjr code.
   def repin # something not right here. The repin goes to users/#. Don't I want it to go to the board I've specified? Why when I'm specifying a board, is it not assigned to that board? When I create a pin and specify a board, it is in the correct board. :)
     @pin = Pin.find(params[:id])
 #    @board = Board.find(params[:pin][:pinning][:board_id]) #MJR
 #    Pinning.create(user_id: current_user.id, board_id: @board_id, pin_id: @pin.id) #MJR
-#    @pin.pinnings.create(user: current_user)
-    @pin = @pin.pinnings.create(user: current_user)
+#    @pins = current_user.pins - changed after adding repinning ability
+    @pin.pinnings.create(user: current_user)
+
+#    @pin.save
+#    @pin = @pin.pinnings.create(user: current_user)
 #    @pin = @pinnings.create(user: current_user) #?
-    redirect_to user_path(current_user) #repin_path is probably better maybe board_path
+    redirect_to board_path #user_path(current_user) #board_path.(current_user) #user_path(current_user) #repin_path is probably better (no route) maybe board_path
   end
 
   private

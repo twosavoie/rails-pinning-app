@@ -6,13 +6,14 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
     @boards = Board.all # Shana @boards = current_user.pinnable_boards
+#    @boards = current_user.pinnable_boards
   end
 
   # GET /boards/1
   # GET /boards/1.json
   def show
     @pins = @board.pins # HJR & AA diff
-#    @pins = @board.pinnings
+#    @pins = @board.pinnings # shows an undefined method "image" for pinning...
   end
 
   # GET /boards/new
