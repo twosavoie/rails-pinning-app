@@ -19,6 +19,7 @@ class PinsController < ApplicationController
 
   def new
     @pin = Pin.new
+    @pin.pinnings.build
   end
 
   def create
@@ -49,16 +50,20 @@ class PinsController < ApplicationController
     end
   end
 
-  def repin
+  def repin # something not right here. The repin goes to users/#. Don't I want it to go to the board I've specified? Why when I'm specifying a board, is it not assigned to that board? When I create a pin and specify a board, it is in the correct board. :)
     @pin = Pin.find(params[:id])
-    @pin.pinnings.create(user: current_user)
-    redirect_to user_path(current_user)
+#    @board = Board.find(params[:pin][:pinning][:board_id]) #MJR
+#    Pinning.create(user_id: current_user.id, board_id: @board_id, pin_id: @pin.id) #MJR
+#    @pin.pinnings.create(user: current_user)
+    @pin = @pin.pinnings.create(user: current_user)
+#    @pin = @pinnings.create(user: current_user) #?
+    redirect_to user_path(current_user) #repin_path is probably better maybe board_path
   end
 
   private
 
   def pin_params
-    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id)
+    params.require(:pin).permit(:title, :url, :slug, :text, :category_id, :image, :user_id, :board_id, pinnings_attributes: [:board_id, :user_id, :id])
   end
 
 end

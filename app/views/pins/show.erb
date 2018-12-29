@@ -14,8 +14,7 @@
     <%= link_to "#{@pin.url}", "#{@pin.url}", html_options = {target: "_blank", class: "url"} %>
   </p>
   <img src="<%= @pin.image.url(:medium) %>">
-  <%= link_to repin_path(@pin), class: "btn btn-default", method: "post" do %> Repin!
-  <% end %>
+  <%= render partial: "shared/repin_form", locals: {pin: @pin} %>
   <p>This pin has been pinned by:</p>
     <ul>
       <% @users.each do |user| %>

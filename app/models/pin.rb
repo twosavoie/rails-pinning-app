@@ -5,8 +5,10 @@ class Pin < ActiveRecord::Base
   belongs_to :category
   belongs_to :user
 
-  has_many :pinnings, inverse_of: :pin, dependent: :destroy 
+  has_many :pinnings, inverse_of: :pin, dependent: :destroy
   has_many :users, through: :pinnings
+
+  accepts_nested_attributes_for :pinnings # , allow_destroy: true #AA
 
   has_attached_file :image, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: "http://placebear.com/300/300"
 

@@ -44,6 +44,14 @@
     <%= f.text_field :slug, class: "form-control", placeholder: "slug" %>
   </div>
 
+  <%= f.fields_for :pinnings do |p| %>
+    <div class="form-group">
+      <label>Which board?</label>
+      <%= p.collection_select(:board_id, current_user.boards, :id, :name, {}, {class: "form-control"}) %>
+      <%= p.hidden_field :user_id, value: current_user.id %>
+    </div>
+  <% end %>
+
   <div class="action">
     <%= f.submit %>
   </div>
