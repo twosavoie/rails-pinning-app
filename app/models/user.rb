@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, :email, :password
   validates_uniqueness_of :email
 
-  has_many :pins, through: :pinnings
   has_many :pinnings, inverse_of: :user, dependent: :destroy
+  has_many :pins, through: :pinnings  
   has_many :boards, inverse_of: :user, dependent: :destroy
 
   def self.authenticate(email, password)

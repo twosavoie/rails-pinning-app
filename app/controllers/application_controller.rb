@@ -7,8 +7,13 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+#  def chosen_board
+#    @board ||= Board.where("name=?", board_name)
+#  end
+#  helper_method :chosen_board
+
   def require_login
-    if !logged_in? 
+    if !logged_in?
       redirect_to :login
     end
   end
