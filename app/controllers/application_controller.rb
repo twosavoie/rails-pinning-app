@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
-#  def chosen_board
-#    @board ||= Board.where("name=?", board_name)
-#  end
-#  helper_method :chosen_board
+  def chosen_board
+    @board ||= Board.find(params[:pin][:pinning][:board_id])
+  end
+  helper_method :chosen_board
 
   def require_login
     if !logged_in?
