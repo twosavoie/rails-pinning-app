@@ -24,8 +24,9 @@ FactoryBot.define do
 
     after(:create) do |user|
 #      create_list(:pin, 3) changed after repin ability added
+      user.boards << FactoryBot.create(:board)
       3.times do
-        user.pinnings.create(pin: FactoryBot.create(:pin))
+        user.pinnings.create(pin: FactoryBot.create(:pin), board: user.boards.first)
       end
     end
   end
@@ -33,6 +34,10 @@ FactoryBot.define do
   factory :pinning do
     pin
     user
+  end
+
+  factory :board do
+    name "My Pins!"
   end
 
 end
