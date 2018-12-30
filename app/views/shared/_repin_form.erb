@@ -1,4 +1,5 @@
-<% if logged_in? %> <!-- <% if logged_in? && current_user %> -->
+
+<% if logged_in? && current_user %>
   <%= form_for pin, url: repin_path(pin), method: "post" do |f| %>
     <%= f.fields_for :pinning do |p| %>
       <div class="form-group">
@@ -14,5 +15,4 @@
   <% end %>
 <% else %>
   <%= link_to "Log in to repin!", login_path %>
-<% end %>
 <% end %>

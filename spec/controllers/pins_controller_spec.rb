@@ -218,6 +218,7 @@ RSpec.describe PinsController do
       @user = FactoryBot.create(:user)
       login(@user)
       @pin = FactoryBot.create(:pin)
+      @board = FactoryBot.create(:board)
     end
 
     after(:each) do
@@ -229,17 +230,17 @@ RSpec.describe PinsController do
     end
 
     it 'responds with a redirect' do
-      post :repin, id: @pin.id, pin: {pinning: {user_id: @user.id}}
+      post :repin, id: @pin.id, pin: {pinning: { board_id: @board.id, user_id: @user.id} }
       expect(response.redirect?).to be(true)
     end
 
     it 'creates a user.pin' do
-      post :repin, id: @pin.id, pin: {pinning: {user_id: @user.id}}
+      post :repin, id: @pin.id, pin: {pinning: { board_id: @board.id, user_id: @user.id} }
       expect(assigns(:pin)).to eq(Pin.find(@pin.id))
     end
 
     it 'redirects to the user show page' do
-      post :repin, id: @pin.id, pin: {pinning: {user_id: @user.id}}
+      post :repin, id: @pin.id, pin: {pinning: { board_id: @board.id, user_id: @user.id} }
       expect(response).to redirect_to(user_path(@user))
     end
   end
