@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :pins, through: :pinnings
   has_many :boards #, inverse_of: :user, dependent: :destroy
   has_many :followers
+  #? has_many :followees
 
   def self.authenticate(email, password)
     @user = User.find_by_email(email)
@@ -21,9 +22,13 @@ class User < ActiveRecord::Base
     return nil
   end
 
+  def fullname
+    "#{self.first_name} #{self.last_name}"
+  end 
+
 #  def followers
 #    Follower.where("user_id=?", self.id)
-#  end 
+#  end
 
   def followed
     Follower.where("follower_id=?", self.id).map{|f| f.user }

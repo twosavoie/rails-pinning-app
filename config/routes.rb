@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :followers
+  resources :followers, except: [:edit, :update]
   resources :boards
   resources :users, except: [:index]
   # The priority is based upon order of creation: first created -> highest priority.

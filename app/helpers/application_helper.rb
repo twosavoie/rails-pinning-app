@@ -12,5 +12,9 @@ module ApplicationHelper
     !current_user.nil? && !current_user.id.nil?
   end
 
+  def fullname
+    "#{self.first_name} #{self.last_name}"
+  end 
+
 
 end

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+Where is this - do I need this? This is a followers/# page. If not, delete the "show" link in the followers page
 <p>
   <strong>User:</strong>
   <%= @follower.user %>
@@ -10,5 +10,5 @@
   <%= @follower.follower_id %>
 </p>
 
-<%= link_to 'Edit', edit_follower_path(@follower) %> |
+<%= link_to 'Edit', new_follower_path(@follower) %> |
 <%= link_to 'Back', followers_path %>
