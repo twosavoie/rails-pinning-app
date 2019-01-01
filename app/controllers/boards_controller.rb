@@ -12,7 +12,9 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.json
   def show
+#    @board = Board.find(params[:id]) #HJR
     @pins = @board.pins # HJR & AA diff
+#    @user = @board.user # HJR
 #    @pins = @board.pinnings # shows an undefined method "image" for pinning...
   end
 
@@ -23,6 +25,9 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+#    @board = Board.chosen_board
+    @board = chosen_board
+    @followers = current_user.user_followers
   end
 
   # POST /boards

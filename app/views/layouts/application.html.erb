@@ -26,6 +26,10 @@
         </button>
 
         <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
+          <li role="presentation">
+            <%= link_to "Boards", boards_path, "role" => "menuitem",  "tabindex" => "-1" %>
+          </li>
+          <li role="presentation" class="divider"></li>
           <% current_user.boards.each do |board| %>
           <li role="presentation">
 <!-- link is to boards/#, my pins is users/# (fix)-->

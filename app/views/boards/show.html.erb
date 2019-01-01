@@ -12,5 +12,7 @@
 
 <%= render partial: "shared/pins_list" %>
 
+<% if current_user.id == @board.user_id %>
 <%= link_to 'Edit', edit_board_path(@board) %> |
+<% end %>
 <%= link_to 'Back', boards_path %>

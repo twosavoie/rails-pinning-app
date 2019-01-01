@@ -11,16 +11,20 @@
     </div>
   <% end %>
 
+<!-- <div class="form-group"> -->
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.hidden_field :user_id, value: current_user.id %>
-<!-- replaced as user shouldn't have to know id to add a board
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %> -->
   </div>
+  <% if !@followers.nil? %>
+    <div class="form-group">
+      <%= select_tag "board[board_pinners_attributes][0][user_id]", options_from_collection_for_select(@followers, :id, :fullname), class: "form-control", include_blank: true %>
+    </div>
+  <% end %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

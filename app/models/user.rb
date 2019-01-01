@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :pins, through: :pinnings
   has_many :boards #, inverse_of: :user, dependent: :destroy
   has_many :followers
+  has_many :board_pinners
   #? has_many :followees
 
   def self.authenticate(email, password)
@@ -24,7 +25,11 @@ class User < ActiveRecord::Base
 
   def fullname
     "#{self.first_name} #{self.last_name}"
-  end 
+  end
+
+#  def full_name # SK version. I think mine works though.
+#    first_name + " " + last_name
+#  end
 
 #  def followers
 #    Follower.where("user_id=?", self.id)
@@ -41,6 +46,10 @@ class User < ActiveRecord::Base
   def user_followers
     self.followers.map{ |f| User.find(f.follower_id) }
   end
+
+  def pinnable_boards
+    self.boards + self.board_pinners.map{ |bp| bp.board }
+  end 
 
 #last end
 end
