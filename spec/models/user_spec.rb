@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+#  pending "add some examples to (or delete) #{__FILE__}"
 
   before(:all) do
     @user = User.create(first_name: "cody", last_name: "skillcode", email: "coder@skillcrush", password: "password")

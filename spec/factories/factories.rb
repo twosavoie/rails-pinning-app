@@ -8,6 +8,15 @@ FactoryBot.define do
     "slug#{n}"
   end
 
+  factory :pinning do
+    pin
+    user
+  end
+
+  factory :board do
+    name "My Pins!"
+  end
+
   factory :pin do
     title "Rails Cheatsheet"
     url "http://rails-cheat.com"
@@ -22,22 +31,30 @@ FactoryBot.define do
     last_name "Coder"
     password "secret"
 
+  factory :user_with_boards do
     after(:create) do |user|
-#      create_list(:pin, 3) changed after repin ability added
       user.boards << FactoryBot.create(:board)
       3.times do
         user.pinnings.create(pin: FactoryBot.create(:pin), board: user.boards.first)
       end
     end
-  end
 
-  factory :pinning do
-    pin
-    user
-  end
+  factory :user_with_boards_and_followers do
+    after(:create) do |user|
+      3.times do
+        follower = FactoryBot.create(:user)
+        Follower.create(user: user, follower_id: follower.id)
+      end
+    end
+  end 
+end
 
-  factory :board do
-    name "My Pins!"
+  factory :user_with_followees do
+    after(:create) do |user|
+      3.times do
+        Follower.create(user: FactoryBot.create(:user), follower_id: user.id)
+      end
+    end
   end
-
+end
 end

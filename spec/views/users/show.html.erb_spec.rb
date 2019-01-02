@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe "users/show", type: :view do
   before(:each) do
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.create(:user_with_boards)
     @pins = @user.pins
   end
 

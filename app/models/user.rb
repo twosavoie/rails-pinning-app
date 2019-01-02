@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :pinnings, inverse_of: :user, dependent: :destroy
   has_many :pins, through: :pinnings
-  has_many :boards #, inverse_of: :user, dependent: :destroy
-  has_many :followers
-  has_many :board_pinners
+  has_many :boards, inverse_of: :user, dependent: :destroy
+  has_many :followers, dependent: :destroy
+  has_many :board_pinners, inverse_of: :user, dependent: :destroy
   #? has_many :followees
 
   def self.authenticate(email, password)
@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   def pinnable_boards
     self.boards + self.board_pinners.map{ |bp| bp.board }
-  end 
+  end
 
 #last end
 end

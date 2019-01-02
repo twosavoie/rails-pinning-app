@@ -2,7 +2,8 @@ require 'spec_helper'
 RSpec.describe PinsController do
 
   before(:each) do
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.create(:user_with_boards)
+    @board_pinner = BoardPinner.create(user: @user, board: FactoryBot.create(:board))
     login(@user)
   end
 
@@ -11,6 +12,7 @@ RSpec.describe PinsController do
       @user.pins.destroy_all
       @user.pinnings.destroy_all
       @user.boards.destroy_all
+      @user.board_pinners.destroy_all
       @user.destroy
     end
   end
@@ -50,6 +52,11 @@ RSpec.describe PinsController do
     it 'assigns an instance variable to a new pin' do
       get :new
       expect(assigns(:pin)).to be_a_new(Pin)
+    end
+
+    it 'assigns @pinnable_boards to all pinnable boards' do
+      get :new
+      expect(assigns[:pinnable_boards]).to eq(@pinnable_boards)
     end
 
     it 'redirects to Login when logged out' do
@@ -107,6 +114,19 @@ RSpec.describe PinsController do
       @pin_hash.delete(:title)
       post :create, pin: @pin_hash
       expect(assigns[:errors].present?).to be(true)
+    end
+
+    it 'pins to a board for which the user is a board_pinner' do
+      @pin_hash[:pinnings_attributes] = []
+      board = @board_pinner.board
+      @pin_hash[:pinnings_attributes] << {board_id: board.id, user_id: @user.id}
+      post :create, pin: @pin_hash
+      pinning = BoardPinner.where("user_id=? AND board_id=?", @user.id, board.id)
+      expect(pinning.present?).to be(true)
+
+      if pinning.present?
+        pinning.destroy_all
+      end
     end
 
     it 'redirects to Login when logged out' do
@@ -242,6 +262,25 @@ RSpec.describe PinsController do
     it 'redirects to the user show page' do
       post :repin, id: @pin.id, pin: {pinning: { board_id: @board.id, user_id: @user.id} }
       expect(response).to redirect_to(user_path(@user))
+    end
+
+    it 'creates a pinning to a board on which the user is a board_pinner' do
+      @pin_hash = {
+        title: @pin.title,
+        url: @pin.url,
+        slug: @pin.slug,
+        text: @pin.text,
+        category_id: @pin.category_id
+      }
+      board = @board_pinner.board
+      @pin_hash[:pinning] = {board_id: board.id}
+      post :repin, id: @pin.id, pin: @pin_hash
+      pinning = BoardPinner.where("board_id=?", board.id)
+      expect(pinning.present?).to be(true)
+
+      if pinning.present?
+        pinning.destroy_all
+      end
     end
   end
 
