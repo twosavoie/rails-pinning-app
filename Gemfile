@@ -7,6 +7,8 @@ gem 'paperclip'
 gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'aws-sdk', '< 2.0'
 
+#create hyperlinks: rails_autolink
+
 # for password encryption
 gem 'bcrypt', '~> 3.1.7'
 
@@ -66,7 +68,7 @@ group :test do
 
   gem 'rspec', '~> 3.8'
   gem 'rspec-rails', '~> 3.8'
-  gem 'factory_bot_rails' 
+  gem 'factory_bot_rails'
 end
 
 ruby '2.4.4'

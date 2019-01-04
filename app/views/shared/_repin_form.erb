@@ -3,7 +3,7 @@
   <%= form_for pin, url: repin_path(pin), method: "post" do |f| %>
     <%= f.fields_for :pinning do |p| %>
       <div class="form-group">
-        <label>Repin to one of your boards?</label>
+        <label class="add-margin">Repin to one of your boards?</label>
         <%= p.collection_select(:board_id, current_user.boards, :id, :name, {}, {class: "form-control"}) %>
       </div>
         <%= p.hidden_field :user_id, value: current_user.id %>

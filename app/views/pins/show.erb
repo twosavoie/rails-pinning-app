@@ -4,6 +4,7 @@
     <%= "#{@pin.title}" %>
   </h1>
 </div>
+<hr/>
 
 <div class="show-pin">
   <p><%= "#{@pin.text}" %></p>
@@ -15,10 +16,10 @@
   </p>
   <img src="<%= @pin.image.url(:medium) %>">
   <%= render partial: "shared/repin_form", locals: {pin: @pin} %>
-  <p>This pin has been pinned by:</p>
-    <ul>
+  <p class="add-margin"><strong>This pin has been pinned by:</strong></p>
+    <ul class="list-group">
       <% @users.each do |user| %>
-      <li><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
+      <li class="list-group-item"><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
       <% end %>
     </ul>
 </div>
@@ -26,4 +27,6 @@
 <a href="/">
   <i class="fa fa-arrow-left"></i>
   Back to Home
-</a>
+</a> |
+ <%= link_to 'Edit Pin', edit_pin_path(@pin.id) %> |
+ <%#<%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %>

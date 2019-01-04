@@ -56,6 +56,9 @@
             <%= link_to "Home", root_path, "role" => "menuitem",  "tabindex" => "-1" %>
           </li>
           <li role="presentation">
+            <%= link_to "Account Info", edit_user_path(current_user), "role" => "menuitem",  "tabindex" => "-1" %>
+          </li>
+          <li role="presentation">
             <%= link_to "Logout", logout_path(current_user), :method => :delete, "role" => "menuitem",  "tabindex" => "-1" %>
 <!-- could also be method: :delete -->
           </li>

@@ -19,3 +19,32 @@
   background-color: #dd5566;
   border-color: #d52b40;
 }
+.btn-default:hover {
+  background-color: #d52b40;
+  border-color: #d52b40;
+}
+div.container::after {
+  margin-bottom: 30px;
+}
+table a:not(.btn), .table a:not(.btn) {
+  text-decoration: none;
+}
+td, th {
+  padding: 5px;
+}
+p.title {
+  font-size: 1.3em;
+}
+.add-margin {
+  margin-top: 10px;
+}
+a {
+  padding: 5px;
+  text-decoration: none !important /* use of !important not great, figure out */
+}
+a:hover {
+  background-color: #c2bcbd;
+}
+a:visited {
+  background-color: #e78692;
+}
