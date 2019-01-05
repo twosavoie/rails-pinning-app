@@ -1,28 +1,23 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Stack:
+Ruby 2.4.4
+Rails 4.2.10
+PostgreSQL
+Heroku at https://ls-second-pin-app.herokuapp.com/login
 
-Things you may want to cover:
+To run locally through the terminal: localhost:3000
+Gems: bundle install
+Database: rake db:create, rake db:migrate, rake db:seed OR rake db:setup completes all three
+Run the server: rails s (or rails server)
 
-* Ruby version
+To test (using RSpec):
+bundle exec rake db:test:prepare
+rspec spec/...
 
-* System dependencies
+Notes to fellow Skillcrushers:
+If you've forked the project from Skillcrush's Github and you are using the secrets.yml file for your AWS keys, you really need to remove secrets.yml from version control, then add it to the gitignore file. If you don't remove it from version control, your keys will be pushed causing you an hour or so of extra work creating new ones... :)
 
-* Configuration
+It is much easier to start with a recent version of RSpec, FactoryBot, and ShouldaMatchers.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+This is a really interesting and challenging first Rails project. I learned a lot about databases and associations, how to use rails, and how to read docs.

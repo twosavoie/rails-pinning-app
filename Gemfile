@@ -8,6 +8,7 @@ gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 gem 'aws-sdk', '< 2.0'
 
 #create hyperlinks: rails_autolink
+#create pretty urls: friendly_id or urls_for_humans
 
 # for password encryption
 gem 'bcrypt', '~> 3.1.7'

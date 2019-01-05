@@ -11,10 +11,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @pins = current_user.pins 
+    @pins = current_user.pins
   end
 
-
+  # don't have this working yet
    def show_by_email
      @user = User.find_by_email(params[:email])
      render :show

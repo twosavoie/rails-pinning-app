@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :followers, except: [:edit, :update]
-  resources :boards
-  resources :users, except: [:index]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -10,7 +8,18 @@ Rails.application.routes.draw do
 
   get 'pins/name-:slug' => 'pins#show_by_name', as: 'pin_by_name'
 
+  # don't have this working yet
+  # get 'users/:email' => 'users#show_by_email', as: 'user_by_email'
+
+  # haven't figured out yet
+  # get 'boards/name-:name' => 'boards#show_board_by_name', as: 'board_by_name'
+
+  # moved down trying to make the show_board_by_name work
+  resources :boards
   resources :pins
+  resources :followers, except: [:edit, :update]
+  resources :users, except: [:index]
+
 
   get '/library' => 'pins#index'
 
@@ -21,6 +30,8 @@ Rails.application.routes.draw do
   post '/login' => 'users#authenticate'
 
   delete 'logout/:id' => "users#logout", as: :logout
+
+  delete 'pins/:id' => "pins#destroy", as: :destroy_pin
 
   post "pins/repin/:id" => "pins#repin", as: 'repin'
 

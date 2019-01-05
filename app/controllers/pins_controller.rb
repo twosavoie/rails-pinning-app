@@ -56,6 +56,18 @@ class PinsController < ApplicationController
     redirect_to user_path(current_user) # redirect_to board_path?
   end
 
+  # DELETE /pins/1
+  # DELETE /pins/1.json
+  # Must @pin = Pin.find(params[:id]) because I did not set the pin in private
+  def destroy
+    @pin = Pin.find(params[:id])
+    @pin.destroy
+    respond_to do |format|
+      format.html { redirect_to pins_url, notice: 'Pin was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def pin_params

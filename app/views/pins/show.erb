@@ -29,4 +29,4 @@
   Back to Home
 </a> |
  <%= link_to 'Edit Pin', edit_pin_path(@pin.id) %> |
- <%#<%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %>
+ <%= link_to 'Delete Pin', @pin, method: :delete, data: { confirm: 'Are you sure?' } %>

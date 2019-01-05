@@ -9,6 +9,12 @@ class BoardsController < ApplicationController
 #    @boards = current_user.pinnable_boards
   end
 
+# Haven't figured out yet
+#  def show_board_by_name
+#    @board = Board.find_by_name(params[:name])
+#    render :show
+#  end
+
   # GET /boards/1
   # GET /boards/1.json
   def show
@@ -17,6 +23,8 @@ class BoardsController < ApplicationController
 #    @user = @board.user # HJR
 #    @pins = @board.pinnings # shows an undefined method "image" for pinning...
   end
+
+
 
   # GET /boards/new
   def new
