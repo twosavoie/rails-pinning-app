@@ -10,10 +10,11 @@ class BoardsController < ApplicationController
   end
 
 # Haven't figured out yet
-#  def show_board_by_name
-#    @board = Board.find_by_name(params[:name])
-#    render :show
-#  end
+  def show_board_by_name
+    @board = Board.find_by_name(params[:name])
+    @pins = @board.pins
+    render :show
+  end
 
   # GET /boards/1
   # GET /boards/1.json

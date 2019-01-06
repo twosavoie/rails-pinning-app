@@ -32,11 +32,9 @@
           <li role="presentation" class="divider"></li>
           <% current_user.boards.each do |board| %>
           <li role="presentation">
-<!-- link is to boards/#, my pins is users/# (fix)-->
-            <a role="menuitem" tabindex="-1" href="/boards/<%= board.id %>">
-              <%= "#{board.name}"%>
-            </a>
+            <%= link_to "#{board.name}", board_by_name_path(board.name), "role" => "menuitem",  "tabindex" => "-1" %>
           </li>
+          
           <% end %>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
