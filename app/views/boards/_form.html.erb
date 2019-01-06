@@ -24,7 +24,7 @@
       <%= select_tag "board[board_pinners_attributes][0][user_id]", options_from_collection_for_select(@followers, :id, :fullname), class: "form-control", include_blank: true %>
     </div>
   <% end %>
-  
+
   <div class="actions">
     <%= f.submit %>
   </div>

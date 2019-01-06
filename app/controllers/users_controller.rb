@@ -8,16 +8,17 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-    @pins = current_user.pins
-  end
-
   # don't have this working yet
-   def show_by_email
-     @user = User.find_by_email(params[:email])
-     render :show
+#   def show_by_email
+#     @user = User.find_by_email(params[:email])
+#     @pins = current_user.pins
+#     render :show
+#   end
+
+   # GET /users/1
+   # GET /users/1.json
+   def show
+     @pins = current_user.pins
    end
 
   # GET /users/new

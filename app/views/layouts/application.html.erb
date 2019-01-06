@@ -33,8 +33,7 @@
           <% current_user.boards.each do |board| %>
           <li role="presentation">
             <%= link_to "#{board.name}", board_by_name_path(board.name), "role" => "menuitem",  "tabindex" => "-1" %>
-          </li>
-          
+          </li>          
           <% end %>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
