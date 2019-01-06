@@ -14,7 +14,7 @@
   <!-- how to create a dropdown menu with bootstrap and js https://www.w3schools.com/bootstrap/bootstrap_ref_js_dropdown.asp -->
 </head>
 <body>
-  <div class="container">
+  <div class="container"> <!-- unclosed but works? -->
     <% if logged_in? && current_user %>
 
 <!-- btn-group seems to do nothing and negates the pull-right (use? no) -->
@@ -33,7 +33,7 @@
           <% current_user.boards.each do |board| %>
           <li role="presentation">
             <%= link_to "#{board.name}", board_by_name_path(board.name), "role" => "menuitem",  "tabindex" => "-1" %>
-          </li>          
+          </li>
           <% end %>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
@@ -63,6 +63,7 @@
 
       </div>
     <% end %>
+<!--    </div>  -->
     <div>
       <%= yield %>
     </div>

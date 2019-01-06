@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:new, :show, :edit, :update, :destroy]
+  before_action :set_board, only: [:show, :edit, :update, :destroy]
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /boards
