@@ -19,7 +19,7 @@
   <p class="add-margin"><strong>This pin has been pinned by:</strong></p>
     <ul class="list-group">
       <% @users.each do |user| %>
-      <li class="list-group-item"><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></li>
+      <li class="list-group-item"><%= link_to "#{user.first_name} #{user.last_name}", user_by_name_path(user.last_name) %></li>
       <% end %>
     </ul>
 </div>

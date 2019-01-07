@@ -9,11 +9,11 @@ class UsersController < ApplicationController
   end
 
   # don't have this working yet
-#   def show_by_email
-#     @user = User.find_by_email(params[:email])
-#     @pins = current_user.pins
-#     render :show
-#   end
+   def show_by_name
+     @user = User.find_by_last_name(params[:last_name])
+     @pins = @user.pins
+     render :show
+   end
 
    # GET /users/1
    # GET /users/1.json

@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   get 'pins/name-:slug' => 'pins#show_by_name', as: 'pin_by_name'
 
   # don't have this working yet
-#   get 'users/:email' => 'users#show_by_email', as: 'user_by_email'
+   get 'users/name-:last_name' => 'users#show_by_name', as: 'user_by_name'
 
-    get 'boards/name-:name' => 'boards#show_board_by_name', as: 'board_by_name'
+  get 'boards/name-:name' => 'boards#show_board_by_name', as: 'board_by_name'
 #   get 'boards/:name' => 'boards#show_board_by_name', as: 'board_by_name'
 #   get ':name' => 'boards#show_board_by_name', as: 'board_by_name'
 #    get ':name', to: 'boards#show_board_by_name', as: :board_by_name # same problem
